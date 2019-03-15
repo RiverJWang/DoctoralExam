@@ -51,7 +51,7 @@ int main()
 	printf("请输入棋盘的行数和列数:\n");
 	scanf("%d%d",&m,&n);
 	printf("请输入起始坐标:\n");
-	scanf("%d%d",&start_x,&start_y);
+	scanf("%d %d",&start_x,&start_y);
 	board[start_x][start_y]=1;
 	int number=1;
 	printf("马的周游路线为:\n");
