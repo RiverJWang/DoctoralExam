@@ -1,40 +1,41 @@
-#include <stdio.h>
-
-void search(void);
-
-int main(void)
+#include<stdio.h>
+char *m[7]={“”,”U.S”,”U.K”,”FRANCE”,”GER”,”ITALI”,”EUSSIAN”};/*国名*/
+int main()
 {
-	search();
-	return 0;
-}
-
-void search(void)
-{
-	char name[7] = {'Z','A','B','C','D','E','F'}; // 名字
-	int country[7] = {0,1, 2, 3, 4, 5, 6}; // 1美国 2德国 3英国 4法国 5俄罗斯 6意大利
-	int thing[7] = {0,1,2,3,4,5,6,7}; // 1医生 2教师 3技师 4当兵  5年纪一 6西安 7杭州 8年纪二
-	int flag[8] = {0};
-
-	for(int i = 1; i <= 6; i++)  // name
-	{
-		for(int j = 1; j <= 6; j++) // country
-		{
-			for(int k = 1; k <= 7; k++) //thing
+	int a[7][7],i,j,t,e,x,y;
+	for(i=0;i<7;i++) /*初始化条件矩阵*/
+		for(j=0;j<7;j++) /*行为人，列为国家，元素的值表示某人是该国人*/
+			a[i][j]=j;
+	for(i=1;i<7;i++) /*条件矩阵每一列的第0号元素作为该列数据处理的标记*/
+		a[0][i]=1; /*标记该列尚未处理*/
+	a[1][1]=a[2][1]=a[3][1]=a[5][1]=0; /*输入条件矩阵中的各种条件*/
+	a[1][3]=a[2][3]=a[3][3]=0; /*0表示不是该国的人*/
+	a[1][4]=a[2][4]=a[3][4]=a[5][4]=a[6][4]=0;
+	a[3][5]=0;
+	a[1][6]=a[3][6]=a[5][6]=0;
+	while(a[0][1]+a[0][2]+a[0][3]+a[0][4]+a[0][5]+a[0][6]>0)
+	{ /*当所有六列均处理完毕后退出循环*/
+		for(i=1;i<7;i++) /*i:列坐标*/
+			if(a[0][i]) /*若该列尚未处理，则进行处理*/
 			{
-				if(name[i] == 'A' && j == 1 && thing[k] == 1) //医生
-					flag[1] = 1;
-				if(name[i] == 'E' && j == 5 && thing[k] == 2) // Teacher
-					flag[2] = 1;
-				if(name[i] == 'C' && j == 2 && thing[k] == 3) // Technician
-					flag[3] = 1;
-				if(name[i] == 'B' && name[i] == 'F' && thing[4] && j != 2) //  当兵 有互斥
-					flag[4] = 1;
-				if((j == 4 && name[i] == 'A' && thing[k] == 5) && ( (j == 6 && name[i] == 'C') )) //年纪
-					flag[5] = 1;
-				if(name[i] == 'B' && j == 1 && thing[k] == 6)
-					flag = 
-
+				for(e=0,j=1;j<7;j++) /*j:行坐标 e:该列中非0元素计数器*/
+					if(a[j][i]) { x=j;y=i;e++;}
+				if(e==1) /*若该列只有一个元素为非零，则进行消去操作*/
+				{
+					for(t=1;t<7;t++)
+						if(t!=i)a[x][t]=0; /*将非零元素所在的行的其它元素置0*/
+					a[0][y]=0; /*设置该列已处理完毕的标记*/
+				}
 			}
-		}
+	}
+	for(i=1;i<7;i++) /*输出推理结果*/
+	{
+		printf(“%c is coming from “,’A’-1+i);
+		for(j=1;j<7;j++)
+			if(a[i][j]!=0)
+			{ 
+				printf(“%s.\n”,m[i][j]>1); 
+				break;
+			}
 	}
 }

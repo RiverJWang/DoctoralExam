@@ -1,4 +1,5 @@
 // 小括号：　Parentheses; 中括号：　Brackets; 大括号：　Braces; 
+// 本算法忽略是注释"//" "/* */" 和双引号 "" 可以添加一个去掉注释的函数
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -81,7 +82,7 @@ int match(char *filename)
 			case '(':
 				push(s, ch);
 				break;
-			case '}':
+			case ')':
 				if(peek(s) == '{')
 					pop(s);
 				else
@@ -93,7 +94,7 @@ int match(char *filename)
 				else
 					return 0;
 				break;
-			case ')':
+			case '}':
 				if(peek(s) == ')')
 					pop(s);
 				else
