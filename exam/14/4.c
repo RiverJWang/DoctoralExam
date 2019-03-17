@@ -37,7 +37,7 @@ void matrix(int a[5][5])
 				maxi = i;
 				maxj = j;
 			}
-			if(a[i][j] < a[mini][minj])
+			if(a[i][j] < a[mini][minj]) // 求最小
 			{
 				mini = i;
 				minj = j;
@@ -45,18 +45,18 @@ void matrix(int a[5][5])
 
 		}
 	}
-	temp = a[2][2];
+	temp = a[2][2];   // 交换中间
 	a[2][2] = a[maxi][maxj];
 	a[maxi][maxj] = temp;
 	
 
-	temp = a[0][0];
+	temp = a[0][0];  // 交换第一个
 	a[0][0] = a[mini][minj];
 	a[mini][minj] = temp;
 	mini = 0;
 	minj = 1;
 
-	for(i = 0; i < 5; i++)
+	for(i = 0; i < 5; i++)  // 找第二个
 	{
 		for(j = 0; j < 5; j++)
 		{
@@ -68,13 +68,13 @@ void matrix(int a[5][5])
 			}
 		}
 	}
-	temp = a[0][4];
+	temp = a[0][4];  // 交换第二个
 	a[0][4] = a[mini][minj];
 	a[mini][minj] = temp;
 	mini = 0;
 	minj = 1;
 	
-	for(i = 0; i < 5; i++)
+	for(i = 0; i < 5; i++) // 找第三个
 	{
 		for(j = 0; j < 5; j++)
 		{
@@ -86,13 +86,13 @@ void matrix(int a[5][5])
 			}
 		}
 	}
-	temp = a[4][0];
+	temp = a[4][0];  // 交换第三个
 	a[4][0] = a[mini][minj];
 	a[mini][minj] = temp;
 	mini = 0;
 	minj = 1;
 
-	for(i = 0; i < 5; i++)
+	for(i = 0; i < 5; i++)  // 找第四个
 	{
 		for(j = 0; j < 5; j++)
 		{
@@ -104,7 +104,7 @@ void matrix(int a[5][5])
 			}
 		}
 	}
-	temp = a[4][4];
+	temp = a[4][4];  // 交换第四个
 	a[4][4] = a[mini][minj];
 	a[mini][minj] = temp;
 	mini = 0;

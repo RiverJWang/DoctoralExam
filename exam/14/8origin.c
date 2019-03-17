@@ -14,8 +14,7 @@ Head* del(Node* HA, Node* HB, int i, int m, int j)  // 假设A B足够长
 	Node *p1, *p2, *p3, *p4;
 	int alen = 0, blen = 0;
 	p1 = p2 = HA;
-	p3 = p4 = HB;
-	
+	p3 = p4 = HB;	
 	while(p1 != 0)
 	{
 		alen++;
@@ -34,11 +33,5 @@ Head* del(Node* HA, Node* HB, int i, int m, int j)  // 假设A B足够长
 		printf("over bondary\n");
 		exit(0);
 	}
-
 	if()
-
-
-
-
-
 }
