@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define FLAG 1
+#define FLAG 0
 int main(void)
 {
 	char ch;
