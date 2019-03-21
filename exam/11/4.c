@@ -1,19 +1,16 @@
 #include <stdio.h>
 
-int length(char *p);
+int length(char *p)
+{
+	int i = 0;
+	for(i = 0; *(p+i) != 0; i++);
+	return i;
+}
 
 int main(void)
 {
-	char *p = "I LOVE YOU~";
-	printf("%d\n", length(p));
+	char a[100];
+	gets(a);
+	printf("%d\n", length(a));
 	return 0;
-}
-
-int length(char *p)
-{
-	int n = 0;
-	int i;
-	for(i = 0; *(p + i) != '\0'; i++)
-		n++;
-	return n;
 }

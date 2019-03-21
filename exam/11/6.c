@@ -1,72 +1,95 @@
 #include <stdio.h>
 #include <stdlib.h>
+#define N 100
 
-void mergeDoc(char *fp1, char *fp2);
+void merge(char *A, char *B, char *C);
+void sort(char *a, int n);
 
 int main(void)
 {
-	mergeDoc("A", "B");
+	char A[N] = {}, B[N] = {}, C[N] = {};
+	gets(A);
+	gets(B);
+	gets(C);
+
+	merge(A, B, C);
 	return 0;
 }
 
-void mergeDoc(char *f1, char *f2)
+void merge(char *A, char *B, char *C)
 {
 	FILE *fp1, *fp2, *fp3;
-	char cha, chb, temp, *s, a[1024];
-	int len = 0, minj;
-	s = a;
-	if((fp1 = fopen(f1, "r")) == NULL)
-	{
-		printf("f1 cannot open\n");
-		exit(0);
-	}
-	if((fp2 = fopen(f2, "r")) == NULL)
-	{
-		printf("f2 cannot open\n");
-		exit(0);
-	}
-	if((fp3 = fopen("C", "w")) == NULL)
-	{
-		printf("f3 cannot open\n");
-		exit(0);
-	}
+	char c[N+1] = {}, ch;
+	int len = 0;
 	
-	cha = fgetc(fp1); // read file a to string *s
-	while(!feof(fp1))
+	if( (fp1 = fopen(A, "r")) == NULL )
 	{
-		*(s + len) = cha;
-		len++;
-		printf("fp1 %s\n", s);
-		cha = fgetc(fp1);
+		printf("fp1 cannot open!\n");
+		exit(0);
 	}
-	chb = fgetc(fp2); // b to *s
-	while(!feof(fp2))
+	if( (fp2 = fopen(B, "r")) == NULL )
 	{
-		*(s + len) = chb;
-		len++;
-		printf("fp2 %s\n", s);
-		chb = fgetc(fp2);
+		printf("fp2 cannot open!\n");
+		exit(0);
 	}
-	*(s + len) = '\0';
 
-	for(int i = 0; i < len; i++) //selection sort
+	if( (fp3 = fopen(C, "w")) == NULL )
 	{
-		minj = i;	
-		for(int j = i; j < len; j++)
-		{
-			if(*(s+j) < *(s+minj))
-				minj = j;
-		}
-		temp = *(s+minj);
-		*(s+minj) = *(s+i);
-		*(s+i) = temp;
+		printf("fp3 cannot open!\n");
+		exit(0);
+	}
+
+	ch = fgetc(fp1);
+	while(!feof(fp1) && (ch != '\n'))
+	{
+		c[len++] = ch;
+		ch = fgetc(fp1);
+	}
+
+	ch = fgetc(fp2);
+	while(!feof(fp2) && (ch != '\n'))
+	{
+		c[len++] = ch;
+		ch = fgetc(fp2);
 	}
 	
-	printf("after sorted %s\n", s);
-	for(int i = 0; i < len; i++) // write to c
-		fputc(*(s+i), fp3);
+	c[len] = '\0';
+
+	printf("before %s\n", c);
 	
+	for(int k = 0; k < len; k++)
+		printf("%d ", c[k]);
+	printf("\n");
+
+	sort(c, len);
+
+	printf("after %s\n", c);
+	for(int k = 0; k < len; k++)
+		printf("%d ", c[k]);
+	printf("\n");
+	fputs(c, fp3);
+
 	fclose(fp1);
 	fclose(fp2);
 	fclose(fp3);
+}
+
+void sort(char *a, int n)
+{
+	int i, j, minj;
+	char t;
+
+	for(i = 0; i < n; i++)
+	{
+		minj = i;
+		for(j = i; j < n; j++)
+		{
+			if(a[j] < a[minj])
+				minj = j;
+		}
+
+		t = a[i];
+		a[i] = a[minj];
+		a[minj] = t;
+	}
 }

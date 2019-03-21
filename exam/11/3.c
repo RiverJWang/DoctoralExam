@@ -1,21 +1,25 @@
 #include <stdio.h>
 
-void change(int n);
+void string(unsigned long int n)
+{
+	unsigned long int r = n / 10;
+
+	if(r == 0)
+		printf("%c ", n % 10 + '0');
+
+	else
+	{
+		string(r);
+		printf("%c ", n % 10 + '0');
+	}
+}
 
 int main(void)
 {
-	int n = 483;
-	change(n);
-	printf("\n");
-	return 0;
-}
+	unsigned long int n;
+	scanf("%ld", &n);
 
-void change(int n)
-{
-	int i;
-	i = n / 10;
-	if(i != 0)
-		change(i);
-	putchar(((n % 10) + '0'));
-	putchar(' ');
+	string(n);
+	putchar('\n');
+	return 0;
 }
