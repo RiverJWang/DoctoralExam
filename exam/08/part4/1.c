@@ -16,10 +16,12 @@ int main(void)
 		printf("Cannot open this file\n");
 		exit(0);
 	}
-
-	while(fgets(buff, 1024, fp1) > 0)
+	
+	fgets(buff, 1024, fp1);
+	while(!feof(fp1))
 	{
 		fprintf(fp2, "The %dst line:%s", line++, buff);
+		fgets(buff, 1024, fp1);
 	}
 	fclose(fp1);
 	fclose(fp2);

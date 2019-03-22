@@ -23,7 +23,7 @@ public int maxPoints(Point[] points) {
 			}
 
 			int count = 0;
-			for (int k = 0; k < len; ++k) {
+			for (int k = 0; k < len; ++k) {  // 看第三点是否在点上
 				if (slope) {
 					// 将k点的x和y带入看直线方程是否有解。
 					if (interceptDX == dX * points[k].y - dY * points[k].x) {
